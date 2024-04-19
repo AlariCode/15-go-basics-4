@@ -4,12 +4,10 @@ import "fmt"
 
 func main() {
 	a := 5
-	pointerA := &a
-	res := double(a)
-	fmt.Println(pointerA)
-	fmt.Println(res)
+	double(&a)
+	fmt.Println(a)
 }
 
-func double(num int) int {
-	return num * 2
+func double(num *int) {
+	*num = *num * 2
 }
