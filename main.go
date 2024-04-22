@@ -3,11 +3,13 @@ package main
 import "fmt"
 
 func main() {
-	a := 5
-	double(&a)
+	a := [4]int{1, 2, 3, 4}
+	reverse(&a) // Меняет порядок элементов на обратный
 	fmt.Println(a)
 }
 
-func double(num *int) {
-	*num = *num * 2
+func reverse(arr *[4]int) {
+	for index, value := range *arr {
+		(*arr)[len(arr)-1-index] = value
+	}
 }
