@@ -3,13 +3,20 @@ package main
 import "fmt"
 
 func main() {
-	a := [4]int{1, 2, 3, 4}
-	reverse(&a) // Меняет порядок элементов на обратный
-	fmt.Println(a)
+	login := promptData("Введите логин")
+	password := promptData("Введите пароль")
+	url := promptData("Введите URL")
+
+	outputPassword(login, password, url)
 }
 
-func reverse(arr *[4]int) {
-	for index, value := range *arr {
-		(*arr)[len(arr)-1-index] = value
-	}
+func promptData(prompt string) string {
+	fmt.Print(prompt)
+	var res string
+	fmt.Scan(&res)
+	return res
+}
+
+func outputPassword(login, password, url string) {
+	fmt.Println(login, password, url)
 }
