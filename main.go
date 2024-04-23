@@ -13,6 +13,17 @@ func main() {
 	password := promptData("Введите пароль")
 	url := promptData("Введите URL")
 
+	// account1 := account{
+	// 	password,
+	// 	"",
+	// 	url,
+	// }
+	account1 := account{
+		password: password,
+		url:      url,
+		login:    login,
+	}
+
 	outputPassword(login, password, url)
 }
 
