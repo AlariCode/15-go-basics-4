@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type account struct {
 	login    string
@@ -9,6 +11,11 @@ type account struct {
 }
 
 func main() {
+	str := []rune("Привет!)")
+	for _, ch := range string(str) {
+		fmt.Println(ch, string(ch))
+	}
+
 	login := promptData("Введите логин")
 	password := promptData("Введите пароль")
 	url := promptData("Введите URL")
