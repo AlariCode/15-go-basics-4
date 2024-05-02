@@ -10,23 +10,23 @@ import (
 
 var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-*!")
 
-type account struct {
+type Account struct {
 	login    string
 	password string
 	url      string
 }
 
-type accountWithTimeStamp struct {
+type AccountWithTimeStamp struct {
 	createdAt time.Time
 	updatedAt time.Time
-	account
+	Account
 }
 
-func (acc *account) outputPassword() {
+func (acc *Account) OutputPassword() {
 	fmt.Println(acc.login, acc.password, acc.url)
 }
 
-func (acc *account) generatePassword(n int) {
+func (acc *Account) generatePassword(n int) {
 	res := make([]rune, n)
 	for i := range res {
 		res[i] = letterRunes[rand.IntN(len(letterRunes))]
@@ -34,7 +34,7 @@ func (acc *account) generatePassword(n int) {
 	acc.password = string(res)
 }
 
-func newAccountWithTimeStamp(login, password, urlString string) (*accountWithTimeStamp, error) {
+func NewAccountWithTimeStamp(login, password, urlString string) (*AccountWithTimeStamp, error) {
 	if login == "" {
 		return nil, errors.New("INVALID_LOGIN")
 	}
@@ -42,10 +42,10 @@ func newAccountWithTimeStamp(login, password, urlString string) (*accountWithTim
 	if err != nil {
 		return nil, errors.New("INVALID_URL")
 	}
-	newAcc := &accountWithTimeStamp{
+	newAcc := &AccountWithTimeStamp{
 		createdAt: time.Now(),
 		updatedAt: time.Now(),
-		account: account{
+		Account: Account{
 			url:      urlString,
 			login:    login,
 			password: password,
