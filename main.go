@@ -2,6 +2,7 @@ package main
 
 import (
 	"demo/password/account"
+	"demo/password/files"
 	"fmt"
 )
 
@@ -15,6 +16,7 @@ func main() {
 		return
 	}
 	myAccount.OutputPassword()
+	files.WriteFile()
 	fmt.Println(myAccount)
 }
 
