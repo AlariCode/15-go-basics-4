@@ -3,22 +3,21 @@ package main
 import (
 	"demo/password/account"
 	"fmt"
+
+	"github.com/fatih/color"
 )
 
 func main() {
-	// 1. Создать аккаунт
-	// 2. Найти аккаунт
-	// 3. Удалить аккаунт
-	// 4. Выход
 	fmt.Println("__Менеджер паролей__")
+	vault := account.NewVault()
 Menu:
 	for {
 		variant := getMenu()
 		switch variant {
 		case 1:
-			createAccount()
+			createAccount(vault)
 		case 2:
-			findAccount()
+			findAccount(vault)
 		case 3:
 			deleteAccount()
 		default:
@@ -39,15 +38,22 @@ func getMenu() int {
 	return variant
 }
 
-func findAccount() {
-
+func findAccount(vault *account.Vault) {
+	url := promptData("Введите URL для поиска")
+	accounts := vault.FindAccountsByUrl(url)
+	if len(accounts) == 0 {
+		color.Red("Аккаунтов не найдено")
+	}
+	for _, account := range accounts {
+		account.Output()
+	}
 }
 
 func deleteAccount() {
 
 }
 
-func createAccount() {
+func createAccount(vault *account.Vault) {
 	login := promptData("Введите логин")
 	password := promptData("Введите пароль")
 	url := promptData("Введите URL")
@@ -56,7 +62,6 @@ func createAccount() {
 		fmt.Println("Неверный формат URL или Логин")
 		return
 	}
-	vault := account.NewVault()
 	vault.AddAccount(*myAccount)
 }
 
