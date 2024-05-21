@@ -3,12 +3,15 @@ package main
 import (
 	"demo/password/account"
 	"demo/password/files"
+	"demo/password/output"
 	"fmt"
 
 	"github.com/fatih/color"
 )
 
 func main() {
+	output.PrintError(1)
+	output.PrintError("sd")
 	fmt.Println("__Менеджер паролей__")
 	vault := account.NewVault(files.NewJsonDb("data.json"))
 	// vault := account.NewVault(cloud.NewCloudDb("https://a.ru"))
