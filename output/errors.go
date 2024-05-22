@@ -1,6 +1,10 @@
 package output
 
-import "github.com/fatih/color"
+import (
+	"demo/password/account"
+
+	"github.com/fatih/color"
+)
 
 func PrintError(value any) {
 	intValue, ok := value.(int)
@@ -21,6 +25,6 @@ func PrintError(value any) {
 	color.Red("Неизвестный тип ошибки")
 }
 
-func sum[T int | float32 | float64 | int16 | int32 | string](a, b T) T {
-	return a + b
+func sum[T account.Account](a, b T) T {
+	// return a + b
 }
