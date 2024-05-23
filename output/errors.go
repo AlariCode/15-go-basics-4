@@ -1,8 +1,6 @@
 package output
 
 import (
-	"demo/password/account"
-
 	"github.com/fatih/color"
 )
 
@@ -23,8 +21,4 @@ func PrintError(value any) {
 		return
 	}
 	color.Red("Неизвестный тип ошибки")
-}
-
-func sum[T account.Account](a, b T) T {
-	// return a + b
 }
