@@ -9,6 +9,12 @@ import (
 	"github.com/fatih/color"
 )
 
+var menu = map[string]func(*account.VaultWithDb){
+	"1": createAccount,
+	"2": findAccount,
+	"3": deleteAccount,
+}
+
 func main() {
 	fmt.Println("__Менеджер паролей__")
 	vault := account.NewVault(files.NewJsonDb("data.json"))
@@ -22,16 +28,11 @@ Menu:
 			"4. Выход",
 			"Выберите вариант",
 		})
-		switch variant {
-		case "1":
-			createAccount(vault)
-		case "2":
-			findAccount(vault)
-		case "3":
-			deleteAccount(vault)
-		default:
+		menuFunc := menu[variant]
+		if menuFunc == nil {
 			break Menu
 		}
+		menuFunc(vault)
 	}
 
 }
