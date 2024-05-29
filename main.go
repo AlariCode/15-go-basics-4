@@ -2,10 +2,10 @@ package main
 
 import (
 	"demo/password/account"
+	"demo/password/encrypter"
 	"demo/password/files"
 	"demo/password/output"
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/fatih/color"
@@ -34,15 +34,7 @@ func main() {
 	if err != nil {
 		output.PrintError("Не удалось найти env файл")
 	}
-	res := os.Getenv("VAR")
-	fmt.Println(res)
-
-	for _, e := range os.Environ() {
-		pair := strings.SplitN(e, "=", 2)
-		fmt.Println(pair[0])
-	}
-
-	vault := account.NewVault(files.NewJsonDb("data.json"))
+	vault := account.NewVault(files.NewJsonDb("data.json"), *encrypter.NewEncrypter())
 	// vault := account.NewVault(cloud.NewCloudDb("https://a.ru"))
 Menu:
 	for {
