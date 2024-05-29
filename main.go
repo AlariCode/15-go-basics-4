@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
+	"github.com/joho/godotenv"
 )
 
 var menu = map[string]func(*account.VaultWithDb){
@@ -29,6 +30,10 @@ var menuVariants = []string{
 
 func main() {
 	fmt.Println("__Менеджер паролей__")
+	err := godotenv.Load()
+	if err != nil {
+		output.PrintError("Не удалось найти env файл")
+	}
 	res := os.Getenv("VAR")
 	fmt.Println(res)
 
